@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const router = require('./router');
 const mongoose = require('mongoose');
+const cors = require('cors');
 
 // db setup
 mongoose
@@ -12,7 +13,7 @@ mongoose
     useNewUrlParser: true,
     useUnifiedTopology: true
   })
-  .then(console.log('cnonected'))
+  .then(console.log('connected'))
   .catch(err => {
     console.log(err);
   });
@@ -20,6 +21,7 @@ mongoose
 const app = express();
 
 app.use(morgan('combined'));
+app.use(cors());
 app.use(bodyParser.json({ type: '*/*' }));
 router(app);
 
